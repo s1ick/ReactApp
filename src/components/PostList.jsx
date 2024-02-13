@@ -1,6 +1,7 @@
 import React from "react";
 import PostItem from "./PostItem";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Typography from '@mui/material/Typography';
 const PostList = ({posts, title, remove}) => {
     if(!posts.length) {
         return (
@@ -12,9 +13,9 @@ const PostList = ({posts, title, remove}) => {
 
     return (
         <div>
-        <h1 style={{textAlign: 'center'}}>
+            <Typography style={{textAlign: 'center'}} variant="h1" gutterBottom>
             {title}
-            </h1>
+      </Typography>
            <TransitionGroup>
            {posts.map((post, index) =>
             <CSSTransition

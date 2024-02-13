@@ -1,12 +1,12 @@
 import React from "react";
-import classes from './MyButton.module.css';
+import Button from '@mui/material/Button';
 
 const MyButton = ({children, ...props}) => {
     return (
         <div>
-          <button {...props} className={classes.myBtn}>
-            {children}
-            </button>  
+            <Button variant="contained" {...props}>
+                {children}
+            </Button>
         </div>
     )
 }

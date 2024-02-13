@@ -1,4 +1,5 @@
 import React from 'react';
+import Typography from '@mui/material/Typography';
 
 class ClassCounter extends React.Component {
     constructor(props) {
@@ -19,7 +20,9 @@ class ClassCounter extends React.Component {
     render() {
         return (
 <div>
-            <h1>{this.state.count}</h1>  
+      <Typography variant="h1" gutterBottom>
+            {this.state.count}
+      </Typography>
            <button onClick={this.Increment}>Increment</button>
            <button onClick={this.Decrement}>Decrement</button> 
          </div>

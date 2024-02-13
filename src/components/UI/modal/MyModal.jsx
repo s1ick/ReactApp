@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import cl from './MyModal.module.css'
-const MyModal = ({children, visible, setVisible}) => {
+import DialogTitle from '@mui/material/DialogTitle';
+import PropTypes from 'prop-types';
+import Dialog from '@mui/material/Dialog';
+import { Button, DialogActions, DialogContent } from "@mui/material";
+import MyButton from "../button/MyButton";
 
-    const rootClasses = [cl.myModal]
-    if(visible) {
-        rootClasses.push(cl.active);
-    }
+const MyModal = ({children, visible, setVisible, closePopup}) => {
+
     return (
-        <div className={rootClasses.join(' ')} onClick={() => setVisible(false)}>
-           <div className={cl.myModalContent} onClick={(e) => e.stopPropagation()}>
-                {children}
-            </div> 
-        </div>
+        <Dialog open={openPopup} onClose={closepopup}>
+            <DialogTitle>Создать пост</DialogTitle>
+            <DialogContent>
+                {children}         
+            </DialogContent>
+    </Dialog>
+
     )
 }
+
 export default MyModal;

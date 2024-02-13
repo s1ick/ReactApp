@@ -1,19 +1,30 @@
 import React from "react";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const MySelect = ({options, defaultValue, value, onChange}) => {
     return (
-        <select 
-        value={value}
-        onChange={event => onChange(event.target.value)}
-        >
-        <option disabled value="">{defaultValue}</option>
-
-        {options.map(option =>
-            <option key={option.value} value={option.value}>
+<div>
+            
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Сортировка</InputLabel>
+          <Select
+               value={value}
+               onChange={event => onChange(event.target.value)}
+              label="Сортировка"
+          >
+            {options.map(option =>
+            <MenuItem key={option.value} value={option.value}>
                 {option.name}
-            </option>
+            </MenuItem>
             )}
-      </select>
+          </Select>
+        </FormControl>
+
+
+      </div>
     )
 }
 export default MySelect;

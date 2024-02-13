@@ -10,6 +10,10 @@ import { useFetching } from "../hooks/useFetching";
 import Loader from "../components/UI/loader/loader";
 import { getPageCount, getPagesArray } from "../utils/pages";
 import Pagination from "../components/UI/pagination/MyPagination";
+import Typography from '@mui/material/Typography';
+import Dialog from '@mui/material/Dialog';
+import { Button, DialogActions, DialogContent } from "@mui/material";
+import DialogTitle from '@mui/material/DialogTitle';
 
 function Posts() {
   const [posts, setPosts] = useState([])
@@ -19,7 +23,7 @@ function Posts() {
   const [totalPages, setTotalPages] = useState(0);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
-
+  const [open, openchange] = useState(false);
 
   const [fetchPosts, isPostLoading, postError] = useFetching(async(limit, page) => {
     const response = await PostService.getAll(limit, page);
@@ -41,7 +45,7 @@ useEffect(() => {
 
 const createPost = (newPost) => {
   setPosts([...posts, newPost])
-  setModal(false)
+  closepopup()
 }
 const removePost = (post) => {
   setPosts(posts.filter(p=>p.id !== post.id))
@@ -49,26 +53,33 @@ const removePost = (post) => {
 
 
 
+const openPopup = () => {
+    openchange(true) 
+}
+const closepopup = () => {
+    openchange(false)
+}
+
   return (
     <div className="App">
+        
       <MyButton
         style={{marginTop: 30}}
-      onClick={()=> setModal(true)}>Создать пользователя</MyButton>
-      <MyModal 
-        visible={modal}
-        setVisible={setModal}
-      
-      >
-        <PostForm create = {createPost} />
-      </MyModal>
-      
+        onClick={()=> openPopup()}>Создать пост</MyButton>
+
+        <MyModal open={openPopup} onClose={closepopup}>
+            <PostForm create = {createPost} />
+        </MyModal>
+
       <hr style={{margin: '15px 0'}}/>
       <PostFilter
         filter={filter}
         setFilter={setFilter}
       />
       {postError &&
-        <h1>Произошла ошибка ${postError}</h1>
+        <Typography variant="h1" gutterBottom>
+            Произошла ошибка ${postError}
+      </Typography>
       }
       {isPostLoading
        ? <div style={{display: 'flex', justifyContent: 'center', marginTop: 50}}><Loader/></div>
